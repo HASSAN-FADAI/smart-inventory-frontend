@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:inventory_managment/core/constants/app_color.dart';
 import 'package:inventory_managment/features/dashboard/views/Product_Management_view.dart';
 import 'package:inventory_managment/features/dashboard/views/dashboard_view.dart';
+import 'package:inventory_managment/features/sales/views/sales_view.dart';
 import 'package:inventory_managment/shared/custom_text.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -49,7 +50,7 @@ class CustomDrawer extends StatelessWidget {
                     context,
                     icon: Icons.shopping_cart_outlined,
                     title: 'المبيعات',
-                    // destination: const SalesView(),
+                    destination: const SalesView(),
                   ),
 
                   _tile(
