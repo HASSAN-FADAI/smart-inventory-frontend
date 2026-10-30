@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_managment/core/constants/app_font.dart';
 
 class CustomText extends StatelessWidget {
   const CustomText({
@@ -20,7 +21,11 @@ class CustomText extends StatelessWidget {
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       textScaler: TextScaler.linear(1.0),
-      style: TextStyle(fontSize: size, fontWeight: weight, color: color),
+      style: AppFonts.vazirmatn(
+        fontSize: size,
+        fontWeight: weight,
+        color: color,
+      ),
     );
   }
 }
