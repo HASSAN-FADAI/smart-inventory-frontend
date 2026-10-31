@@ -6,6 +6,8 @@ import 'package:inventory_managment/features/dashboard/views/dashboard_view.dart
 import 'package:inventory_managment/features/inventory/views/inventory_management_view.dart';
 import 'package:inventory_managment/features/order_history/views/order_history_view.dart';
 import 'package:inventory_managment/features/sales/views/sales_view.dart';
+import 'package:inventory_managment/features/supplier/views/suppliers_management_view.dart';
+import 'package:inventory_managment/features/supplier/widget/supplier_card.dart';
 import 'package:inventory_managment/shared/custom_text.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -73,8 +75,20 @@ class CustomDrawer extends StatelessWidget {
                   _tile(
                     context,
                     icon: Icons.bar_chart,
+                    title: 'الموردين',
+                    destination: const SuppliersManagementView(),
+                  ),
+                  _tile(
+                    context,
+                    icon: Icons.bar_chart,
+                    title: 'العملاء',
+                    destination: const SuppliersManagementView(),
+                  ),
+                  _tile(
+                    context,
+                    icon: Icons.bar_chart,
                     title: 'التقارير',
-                    // destination: const ReportsView(),
+                    destination: const SuppliersManagementView(),
                   ),
                   _tile(
                     context,
