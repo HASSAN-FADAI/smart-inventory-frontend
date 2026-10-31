@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:inventory_managment/core/constants/app_color.dart';
 import 'package:inventory_managment/shared/custom_button.dart';
 import 'package:inventory_managment/shared/custom_text.dart';
 

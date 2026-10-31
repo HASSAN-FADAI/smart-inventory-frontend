@@ -3,6 +3,8 @@ import 'package:gap/gap.dart';
 import 'package:inventory_managment/core/constants/app_color.dart';
 import 'package:inventory_managment/features/dashboard/views/Product_Management_view.dart';
 import 'package:inventory_managment/features/dashboard/views/dashboard_view.dart';
+import 'package:inventory_managment/features/inventory/views/inventory_management_view.dart';
+import 'package:inventory_managment/features/order_history/views/order_history_view.dart';
 import 'package:inventory_managment/features/sales/views/sales_view.dart';
 import 'package:inventory_managment/shared/custom_text.dart';
 
@@ -56,14 +58,14 @@ class CustomDrawer extends StatelessWidget {
                   _tile(
                     context,
                     icon: Icons.people_outline,
-                    title: 'العملاء',
-                    //  destination: const CustomersView()
+                    title: 'المخزون',
+                    destination: const InventoryManagementView(),
                   ),
                   _tile(
                     context,
                     icon: Icons.local_shipping_outlined,
-                    title: 'الموردين',
-                    //  destination: const SuppliersView()
+                    title: ' سجل المبيعات /الفواتير',
+                    destination: const OrderHistoryView(),
                   ),
 
                   const Divider(color: Colors.white24),
@@ -106,7 +108,6 @@ class CustomDrawer extends StatelessWidget {
     );
   }
 
-  // دالة مساعدة (Helper Method) لإدارة الانتقال وإغلاق القائمة تلقائياً
   Widget _tile(
     BuildContext context, {
     required IconData icon,
@@ -124,10 +125,8 @@ class CustomDrawer extends StatelessWidget {
         child: CustomText(text: title, color: Colors.white, size: 14),
       ),
       onTap: () {
-        // 1. إغلاق الـ Drawer أولاً
         Navigator.pop(context);
 
-        // 2. الانتقال للصفحة المحددة إذا كانت موجودة وليست الصفحة الحالية
         if (destination != null && !isActive) {
           Navigator.push(
             context,

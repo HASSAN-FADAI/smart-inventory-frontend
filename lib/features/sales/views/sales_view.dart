@@ -24,7 +24,6 @@ class _SalesViewState extends State<SalesView> {
   ];
   int selectedIndex = 0;
 
-  // نموذج تجريبي للكميات الخاصة بالمنتجات في شاشة المبيعات
   final Map<int, int> _productQuantities = {0: 1, 1: 0, 2: 5};
 
   @override
@@ -68,7 +67,7 @@ class _SalesViewState extends State<SalesView> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const CustomText(
-                      text: 'شاشة بيع ومبيعات (POS)',
+                      text: 'ادارة البيع والمبيعات ',
                       weight: FontWeight.bold,
                       size: 18,
                     ),
