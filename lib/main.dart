@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inventory_managment/features/dashboard/views/Product_Management_view.dart';
+import 'package:inventory_managment/splash.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         textTheme: GoogleFonts.vazirmatnTextTheme(Theme.of(context).textTheme),
       ),
-      home: ProductManagementView(),
+      home: SplashView(),
     );
   }
 }

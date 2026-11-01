@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:inventory_managment/core/constants/app_color.dart';
+import 'package:inventory_managment/features/customer/views/customers_management_view.dart';
 import 'package:inventory_managment/features/dashboard/views/Product_Management_view.dart';
 import 'package:inventory_managment/features/dashboard/views/dashboard_view.dart';
 import 'package:inventory_managment/features/inventory/views/inventory_management_view.dart';
 import 'package:inventory_managment/features/order_history/views/order_history_view.dart';
+import 'package:inventory_managment/features/report/views/reports_view.dart';
+import 'package:inventory_managment/features/report/widget/report_stat_card.dart';
 import 'package:inventory_managment/features/sales/views/sales_view.dart';
 import 'package:inventory_managment/features/supplier/views/suppliers_management_view.dart';
 import 'package:inventory_managment/features/supplier/widget/supplier_card.dart';
@@ -82,13 +85,13 @@ class CustomDrawer extends StatelessWidget {
                     context,
                     icon: Icons.bar_chart,
                     title: 'العملاء',
-                    destination: const SuppliersManagementView(),
+                    destination: const CustomersManagementView(),
                   ),
                   _tile(
                     context,
                     icon: Icons.bar_chart,
                     title: 'التقارير',
-                    destination: const SuppliersManagementView(),
+                    destination: const ReportsView(),
                   ),
                   _tile(
                     context,

@@ -34,7 +34,7 @@ class _SuppliersManagementViewState extends State<SuppliersManagementView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade50,
+      backgroundColor: AppColors.scaffoldPrimary,
       endDrawer: const CustomDrawer(),
       appBar: AppBar(
         backgroundColor: Colors.white,

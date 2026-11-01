@@ -9,5 +9,5 @@ class AppColors {
 
   static const Color textPrimary = Colors.black;
   static const Color textSecondry = Colors.white;
-  static const Color scaffoldPrimary = Color.fromARGB(236, 203, 203, 206);
+  static const Color scaffoldPrimary = Color.fromARGB(235, 238, 238, 240);
 }
