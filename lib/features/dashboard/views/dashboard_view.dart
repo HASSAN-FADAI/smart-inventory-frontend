@@ -129,43 +129,51 @@ class DashboardView extends StatelessWidget {
                       )
                     : Row(
                         children: const [
-                          CustomCard(
-                            title: 'المنتجات منخفضة المخزون',
-                            value: '17 منتج',
-                            subtitle: 'يحتاج لإعادة طلب',
-                            icon: Icon(
-                              Icons.warning_amber_rounded,
-                              color: Colors.red,
+                          Expanded(
+                            child: CustomCard(
+                              title: 'المنتجات منخفضة المخزون',
+                              value: '17 منتج',
+                              subtitle: 'يحتاج لإعادة طلب',
+                              icon: Icon(
+                                Icons.warning_amber_rounded,
+                                color: Colors.red,
+                              ),
+                              backgroundIconColor: Color(0xFFFDE8E8),
+                              iconColor: Colors.red,
                             ),
-                            backgroundIconColor: Color(0xFFFDE8E8),
-                            iconColor: Colors.red,
                           ),
                           Gap(15),
-                          CustomCard(
-                            title: 'عدد المنتجات',
-                            value: '1,248 منتج',
-                            subtitle: '10 أصناف جديدة',
-                            icon: Icon(
-                              Icons.inventory_2_outlined,
-                              color: Colors.blue,
+                          Expanded(
+                            child: CustomCard(
+                              title: 'عدد المنتجات',
+                              value: '1,248 منتج',
+                              subtitle: '10 أصناف جديدة',
+                              icon: Icon(
+                                Icons.inventory_2_outlined,
+                                color: Colors.blue,
+                              ),
+                              backgroundIconColor: Color(0xFFE0F2FE),
+                              iconColor: Colors.blue,
                             ),
-                            backgroundIconColor: Color(0xFFE0F2FE),
-                            iconColor: Colors.blue,
                           ),
                           Gap(15),
-                          CustomCard(
-                            title: 'إجمالي المبيعات اليومية',
-                            value: '2,850.50 SAR',
-                            subtitle: '+12% منذ أمس',
-                            icon: Icon(Icons.trending_up, color: Colors.green),
-                            backgroundIconColor: Color(0xFFDCFCE7),
-                            iconColor: Colors.green,
+                          Expanded(
+                            child: CustomCard(
+                              title: 'إجمالي المبيعات اليومية',
+                              value: '2,850.50 SAR',
+                              subtitle: '+12% منذ أمس',
+                              icon: Icon(
+                                Icons.trending_up,
+                                color: Colors.green,
+                              ),
+                              backgroundIconColor: Color(0xFFDCFCE7),
+                              iconColor: Colors.green,
+                            ),
                           ),
                         ],
                       ),
                 const Gap(25),
 
-                // قسم التنبيهات والفواتير (يتجاوب بالانتقال من صف إلى عمود)
                 isMobile
                     ? Column(
                         children: [

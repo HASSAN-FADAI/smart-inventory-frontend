@@ -24,52 +24,50 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Card(
-        color: AppColors.secondry,
-        elevation: 2,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              // العنوان والأيقونة
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: 36,
-                    height: 36,
-                    decoration: BoxDecoration(
-                      color: backgroundIconColor,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Center(child: icon),
+    return Card(
+      color: AppColors.secondry,
+      elevation: 2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            // العنوان والأيقونة
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  width: 36,
+                  height: 36,
+                  decoration: BoxDecoration(
+                    color: backgroundIconColor,
+                    borderRadius: BorderRadius.circular(8),
                   ),
-                  CustomText(text: title, weight: FontWeight.bold, size: 15),
-                ],
-              ),
-              const Gap(15),
-              // القيمة الكبرى (مثل الرقم أو المبلغ)
-              CustomText(text: value, weight: FontWeight.bold, size: 22),
-              const Gap(10),
-              // الوصف السفلي
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  CustomText(
-                    text: subtitle,
-                    size: 13,
-                    weight: FontWeight.w500,
-                    color: Colors.grey.shade600,
-                  ),
-                  const Gap(6),
-                  CircleAvatar(backgroundColor: iconColor, radius: 4),
-                ],
-              ),
-            ],
-          ),
+                  child: Center(child: icon),
+                ),
+                CustomText(text: title, weight: FontWeight.bold, size: 15),
+              ],
+            ),
+            const Gap(15),
+            // القيمة الكبرى (مثل الرقم أو المبلغ)
+            CustomText(text: value, weight: FontWeight.bold, size: 22),
+            const Gap(10),
+            // الوصف السفلي
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                CustomText(
+                  text: subtitle,
+                  size: 13,
+                  weight: FontWeight.w500,
+                  color: Colors.grey.shade600,
+                ),
+                const Gap(6),
+                CircleAvatar(backgroundColor: iconColor, radius: 4),
+              ],
+            ),
+          ],
         ),
       ),
     );
