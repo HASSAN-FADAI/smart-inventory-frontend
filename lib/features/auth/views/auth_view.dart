@@ -73,6 +73,7 @@ class _AuthViewState extends State<AuthView> {
                                       onTap: () {
                                         setState(() {
                                           isLoginMode = true;
+                                          formKey.currentState?.reset();
                                         });
                                       },
                                       child: Container(
@@ -107,6 +108,7 @@ class _AuthViewState extends State<AuthView> {
                                       onTap: () {
                                         setState(() {
                                           isLoginMode = false;
+                                          formKey.currentState?.reset();
                                         });
                                       },
                                       child: Container(
@@ -142,6 +144,7 @@ class _AuthViewState extends State<AuthView> {
 
                               if (!isLoginMode) ...[
                                 CustomUserTextField(
+                                  key: const ValueKey('full_name'),
                                   hintText: 'Full Name',
                                   isPassword: false,
                                   controller: nameController,
@@ -152,6 +155,7 @@ class _AuthViewState extends State<AuthView> {
                               ],
 
                               CustomUserTextField(
+                                key: const ValueKey('email'),
                                 hintText: 'Email',
                                 isPassword: false,
                                 controller: emailController,
@@ -161,6 +165,7 @@ class _AuthViewState extends State<AuthView> {
                               const Gap(20),
 
                               CustomUserTextField(
+                                key: const ValueKey('password'),
                                 hintText: 'Password',
                                 isPassword: true,
                                 controller: passwordController,
