@@ -35,7 +35,7 @@ class _CustomUserTextFieldState extends State<CustomUserTextField> {
     return TextFormField(
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'إملء من فضلك ${widget.hintText}';
+          return ' إملء من فضلك الحقول ';
         }
 
         return null;

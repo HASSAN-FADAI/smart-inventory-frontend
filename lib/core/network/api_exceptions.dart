@@ -46,17 +46,26 @@ class ApiExceptions {
     final statusCode = response?.statusCode;
     final data = response?.data;
 
-    // استخراج رسالة الخطأ القادمة من الباك إند (NestJS) إن وجدت
+    if (statusCode == 429) {
+      return ApiError(
+        message: 'تم إرسال طلبات كثيرة جداً، يرجى الانتظار قليلاً.',
+      );
+    }
+
     if (data is Map<String, dynamic> && data['message'] != null) {
       final serverMessage = data['message'];
       if (serverMessage is List && serverMessage.isNotEmpty) {
         return ApiError(message: serverMessage.first.toString());
       } else if (serverMessage is String && serverMessage.isNotEmpty) {
+        if (serverMessage.contains('ThrottlerException')) {
+          return ApiError(
+            message: 'تم إرسال طلبات كثيرة جداً، يرجى الانتظار قليلاً.',
+          );
+        }
         return ApiError(message: serverMessage);
       }
     }
 
-    // رسائل افتراضية واضحة حسب رمز الحالة (HTTP Status Code)
     switch (statusCode) {
       case 400:
         return ApiError(

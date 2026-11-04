@@ -33,7 +33,6 @@ class CustomCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            // العنوان والأيقونة
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -50,10 +49,8 @@ class CustomCard extends StatelessWidget {
               ],
             ),
             const Gap(15),
-            // القيمة الكبرى (مثل الرقم أو المبلغ)
             CustomText(text: value, weight: FontWeight.bold, size: 22),
             const Gap(10),
-            // الوصف السفلي
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
