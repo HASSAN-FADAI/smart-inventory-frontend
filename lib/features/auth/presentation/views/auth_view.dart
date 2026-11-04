@@ -202,38 +202,53 @@ class _AuthViewState extends State<AuthView> {
 
                                 BlocBuilder<AuthCubit, AuthState>(
                                   builder: (BuildContext context, state) {
+                                    final isLocked = state is AuthLocked;
+                                    final remainingSeconds = isLocked
+                                        ? state.remainingSeconds
+                                        : 0;
                                     final loading = state is AuthLoading;
                                     final authCubit = context.read<AuthCubit>();
                                     return CustomAuthButton(
-                                      text: isLoginMode
-                                          ? 'Login'
-                                          : 'Create Account',
+                                      text: isLocked
+                                          ? 'انتظر ($remainingSeconds ثانية)'
+                                          : (isLoginMode
+                                                ? 'Login'
+                                                : 'Create Account'),
                                       textColor: Colors.white,
                                       widget: loading
                                           ? CircularProgressIndicator(
                                               color: Colors.white,
                                             )
                                           : null,
-                                      onTap: () {
-                                        if (!formKey.currentState!.validate()) {
-                                          return;
-                                        }
+                                      // تعطيل الزر تماماً إذا كان في حالة تحميل أو حظر مؤقت
+                                      onTap: (loading || isLocked)
+                                          ? null
+                                          : () {
+                                              if (!formKey.currentState!
+                                                  .validate()) {
+                                                return;
+                                              }
 
-                                        if (isLoginMode) {
-                                          authCubit.login(
-                                            email: emailController.text.trim(),
-                                            password: passwordController.text
-                                                .trim(),
-                                          );
-                                        } else {
-                                          authCubit.register(
-                                            name: nameController.text.trim(),
-                                            email: emailController.text.trim(),
-                                            password: passwordController.text
-                                                .trim(),
-                                          );
-                                        }
-                                      },
+                                              if (isLoginMode) {
+                                                authCubit.login(
+                                                  email: emailController.text
+                                                      .trim(),
+                                                  password: passwordController
+                                                      .text
+                                                      .trim(),
+                                                );
+                                              } else {
+                                                authCubit.register(
+                                                  name: nameController.text
+                                                      .trim(),
+                                                  email: emailController.text
+                                                      .trim(),
+                                                  password: passwordController
+                                                      .text
+                                                      .trim(),
+                                                );
+                                              }
+                                            },
                                     );
                                   },
                                 ),

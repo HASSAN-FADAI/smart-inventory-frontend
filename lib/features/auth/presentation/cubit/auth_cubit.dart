@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:inventory_managment/core/errors/api_error.dart';
 import 'package:inventory_managment/features/auth/domain/usecases/auth_usecase.dart';
@@ -6,8 +8,26 @@ import 'auth_state.dart';
 class AuthCubit extends Cubit<AuthState> {
   final AuthUseCase loginUseCase, registerUseCase;
 
+  Timer? _cooldownTimer;
+
   AuthCubit({required this.loginUseCase, required this.registerUseCase})
     : super(AuthInitial());
+
+  void _startCooldown() {
+    int seconds = 15;
+    emit(AuthLocked(seconds));
+
+    _cooldownTimer?.cancel();
+    _cooldownTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      seconds--;
+      if (seconds > 0) {
+        emit(AuthLocked(seconds));
+      } else {
+        timer.cancel();
+        emit(AuthInitial());
+      }
+    });
+  }
 
   Future<void> login({required String email, required String password}) async {
     emit(AuthLoading());
@@ -15,7 +35,11 @@ class AuthCubit extends Cubit<AuthState> {
       final user = await loginUseCase.login(email: email, password: password);
       emit(AuthSuccess(user, isLogin: true));
     } on ApiError catch (e) {
-      emit(AuthError(e.message));
+      if (e.statusCode == 429 || e.message.contains('طلبات كثيرة')) {
+        _startCooldown();
+      } else {
+        emit(AuthError(e.message));
+      }
     } catch (e) {
       emit(AuthError(e.toString()));
     }
@@ -35,9 +59,19 @@ class AuthCubit extends Cubit<AuthState> {
       );
       emit(AuthSuccess(user, isLogin: false));
     } on ApiError catch (e) {
-      emit(AuthError(e.message));
+      if (e.statusCode == 429 || e.message.contains('طلبات كثيرة')) {
+        _startCooldown();
+      } else {
+        emit(AuthError(e.message));
+      }
     } catch (e) {
       emit(AuthError(e.toString()));
     }
+  }
+
+  @override
+  Future<void> close() {
+    _cooldownTimer?.cancel();
+    return super.close();
   }
 }

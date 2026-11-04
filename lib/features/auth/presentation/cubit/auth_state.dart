@@ -16,3 +16,8 @@ class AuthError extends AuthState {
   final String message;
   AuthError(this.message);
 }
+
+class AuthLocked extends AuthState {
+  final int remainingSeconds;
+  AuthLocked(this.remainingSeconds);
+}
