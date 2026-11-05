@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:inventory_managment/core/constants/app_color.dart';
-import 'package:inventory_managment/features/dashboard/widget/search_field.dart';
+import 'package:inventory_managment/features/dashboard/presentation/widget/search_field.dart';
 import 'package:inventory_managment/features/inventory/widget/inventory_app_bar.dart';
 import 'package:inventory_managment/features/inventory/widget/inventory_bottom_sheet_helper.dart';
 import 'package:inventory_managment/features/inventory/widget/inventory_header_section.dart';

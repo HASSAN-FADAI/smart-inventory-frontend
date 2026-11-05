@@ -6,7 +6,7 @@ import 'package:inventory_managment/features/auth/presentation/cubit/auth_cubit.
 import 'package:inventory_managment/features/auth/presentation/cubit/auth_state.dart';
 import 'package:inventory_managment/features/auth/widget/costum_user_text_field.dart';
 import 'package:inventory_managment/features/auth/widget/custom_auth_button.dart';
-import 'package:inventory_managment/features/dashboard/views/dashboard_view.dart';
+import 'package:inventory_managment/features/dashboard/presentation/views/dashboard_view.dart';
 import 'package:inventory_managment/shared/custom_snack_bar.dart';
 
 class AuthView extends StatefulWidget {

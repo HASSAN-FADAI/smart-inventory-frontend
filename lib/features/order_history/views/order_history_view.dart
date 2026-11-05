@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:inventory_managment/core/constants/app_color.dart';
-import 'package:inventory_managment/features/dashboard/widget/search_field.dart';
+import 'package:inventory_managment/features/dashboard/presentation/widget/search_field.dart';
 import 'package:inventory_managment/features/order_history/widget/order_history_app_bar.dart';
 import 'package:inventory_managment/features/order_history/widget/order_history_list_section.dart';
 import 'package:inventory_managment/shared/Custom_drawer.dart';

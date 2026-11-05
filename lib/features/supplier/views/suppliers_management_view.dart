@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:inventory_managment/core/constants/app_color.dart';
-import 'package:inventory_managment/features/dashboard/widget/search_field.dart';
+import 'package:inventory_managment/features/dashboard/presentation/widget/search_field.dart';
 import 'package:inventory_managment/features/supplier/widget/add_supplier_bottom_sheet.dart';
 import 'package:inventory_managment/features/supplier/widget/supplier_card.dart';
 import 'package:inventory_managment/shared/Custom_drawer.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:inventory_managment/core/constants/app_color.dart';
-import 'package:inventory_managment/features/dashboard/widget/product_category.dart';
-import 'package:inventory_managment/features/dashboard/widget/search_field.dart';
+import 'package:inventory_managment/features/dashboard/presentation/widget/product_category.dart';
+import 'package:inventory_managment/features/dashboard/presentation/widget/search_field.dart';
 import 'package:inventory_managment/features/sales/widget/sales_product_card.dart';
 import 'package:inventory_managment/shared/Custom_drawer.dart';
 import 'package:inventory_managment/shared/custom_text.dart';

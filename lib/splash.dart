@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:inventory_managment/core/constants/app_color.dart';
-import 'package:inventory_managment/features/dashboard/views/dashboard_view.dart';
+import 'package:inventory_managment/features/dashboard/presentation/views/dashboard_view.dart';
 import 'package:inventory_managment/shared/custom_text.dart';
 
 class SplashView extends StatefulWidget {

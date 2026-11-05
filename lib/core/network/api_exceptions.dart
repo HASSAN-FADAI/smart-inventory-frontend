@@ -52,31 +52,15 @@ class ApiExceptions {
       );
     }
 
-    if (data is Map<String, dynamic> && data['message'] != null) {
-      final serverMessage = data['message'];
-      if (serverMessage is List && serverMessage.isNotEmpty) {
-        return ApiError(message: serverMessage.first.toString());
-      } else if (serverMessage is String && serverMessage.isNotEmpty) {
-        if (serverMessage.contains('ThrottlerException')) {
-          return ApiError(
-            message: 'تم إرسال طلبات كثيرة جداً، يرجى الانتظار قليلاً.',
-          );
-        }
-        return ApiError(message: serverMessage);
-      }
-    }
-
     switch (statusCode) {
       case 400:
         return ApiError(
           message: 'البيانات المرسلة غير صحيحة، يرجى مراجعة المدخلات.',
         );
       case 401:
-        return ApiError(
-          message: 'انتهت صلاحية الجلسة أو بيانات الدخول غير صحيحة.',
-        );
+        return ApiError(message: 'انتهت صلاحية الجلسة أو لست مسجل دخول.');
       case 403:
-        return ApiError(message: 'ليس لديك صلاحية للقيامبهذا الإجراء.');
+        return ApiError(message: 'ليس لديك صلاحية للقيام بهذا الإجراء.');
       case 404:
         return ApiError(message: 'البيانات المطلوبة غير موجودة على الخادم.');
       case 409:
@@ -97,11 +81,22 @@ class ApiExceptions {
         return ApiError(
           message: 'حدث خلل في الخادم الداخلي، يرجى المحاولة لاحقاً.',
         );
-      default:
-        return ApiError(
-          message:
-              'حدث خطأ من الخادم (رمز الخطأ: ${statusCode ?? "غير معروف"}).',
-        );
     }
+    if (data is Map<String, dynamic> && data['message'] != null) {
+      final serverMessage = data['message'];
+      if (serverMessage is List && serverMessage.isNotEmpty) {
+        return ApiError(message: serverMessage.first.toString());
+      } else if (serverMessage is String && serverMessage.isNotEmpty) {
+        if (serverMessage.contains('ThrottlerException')) {
+          return ApiError(
+            message: 'تم إرسال طلبات كثيرة جداً، يرجى الانتظار قليلاً.',
+          );
+        }
+        return ApiError(message: serverMessage);
+      }
+    }
+    return ApiError(
+      message: 'حدث خطأ من الخادم (رمز الخطأ: ${statusCode ?? "غير معروف"}).',
+    );
   }
 }

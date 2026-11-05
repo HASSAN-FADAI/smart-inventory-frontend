@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:inventory_managment/core/services/locator.dart';
 import 'package:inventory_managment/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:inventory_managment/features/auth/presentation/views/auth_view.dart';
+import 'package:inventory_managment/features/dashboard/presentation/cubit/dashboard_cubit.dart';
+import 'package:inventory_managment/features/dashboard/presentation/views/dashboard_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +21,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => getIt<AuthCubit>())],
+      providers: [
+        BlocProvider(create: (_) => getIt<AuthCubit>()),
+        BlocProvider(create: (_) => getIt<DashboardCubit>()),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

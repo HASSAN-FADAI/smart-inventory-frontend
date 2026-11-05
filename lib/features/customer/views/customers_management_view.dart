@@ -3,7 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:inventory_managment/core/constants/app_color.dart';
 import 'package:inventory_managment/features/customer/widget/add_customer_bottom_sheet.dart';
 import 'package:inventory_managment/features/customer/widget/customer_card.dart';
-import 'package:inventory_managment/features/dashboard/widget/search_field.dart';
+import 'package:inventory_managment/features/dashboard/presentation/widget/search_field.dart';
 import 'package:inventory_managment/shared/Custom_drawer.dart';
 import 'package:inventory_managment/shared/custom_text.dart';
 
