@@ -6,11 +6,12 @@ import 'package:inventory_managment/features/auth/presentation/cubit/auth_cubit.
 import 'package:inventory_managment/features/auth/presentation/views/auth_view.dart';
 import 'package:inventory_managment/features/dashboard/presentation/cubit/dashboard_cubit.dart';
 import 'package:inventory_managment/features/dashboard/presentation/views/dashboard_view.dart';
+import 'package:inventory_managment/features/products/presentation/cubit/products_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  setupServiceLocator();
+  initServiceLocator();
 
   runApp(const MyApp());
 }
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => getIt<AuthCubit>()),
         BlocProvider(create: (_) => getIt<DashboardCubit>()),
+        BlocProvider(create: (context) => getIt<ProductsCubit>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
