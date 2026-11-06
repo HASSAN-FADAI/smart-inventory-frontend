@@ -9,13 +9,13 @@ class ProductCategory extends StatefulWidget {
     required this.selectedIndex,
     required this.categories,
     required this.onTap,
-    required this.onLongPressDelete,
+    this.onLongPressDelete,
   });
 
   final int selectedIndex;
   final List<CategoryEntity> categories;
   final Function(int index) onTap;
-  final Function(String categoryId) onLongPressDelete;
+  final Function(String categoryId)? onLongPressDelete;
 
   @override
   State<ProductCategory> createState() => _ProductCategoryState();
@@ -90,7 +90,9 @@ class _ProductCategoryState extends State<ProductCategory> {
                       ),
                       onPressed: () {
                         Navigator.pop(ctx);
-                        widget.onLongPressDelete(category.id);
+                        if (index == 0 || widget.onLongPressDelete == null) {
+                          return;
+                        }
                       },
                       child: const CustomText(text: 'حذف', color: Colors.white),
                     ),

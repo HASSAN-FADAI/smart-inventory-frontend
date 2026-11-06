@@ -7,6 +7,7 @@ import 'package:inventory_managment/features/auth/presentation/views/auth_view.d
 import 'package:inventory_managment/features/dashboard/presentation/cubit/dashboard_cubit.dart';
 import 'package:inventory_managment/features/dashboard/presentation/views/dashboard_view.dart';
 import 'package:inventory_managment/features/products/presentation/cubit/products_cubit.dart';
+import 'package:inventory_managment/features/sales/presentation/cubit/sales_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => getIt<AuthCubit>()),
         BlocProvider(create: (_) => getIt<DashboardCubit>()),
         BlocProvider(create: (context) => getIt<ProductsCubit>()),
+        BlocProvider(create: (context) => getIt<SalesCubit>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -35,7 +37,7 @@ class MyApp extends StatelessWidget {
             Theme.of(context).textTheme,
           ),
         ),
-        home: DashboardView(),
+        home: AuthView(),
       ),
     );
   }

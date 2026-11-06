@@ -57,10 +57,6 @@ class _ProductManagementViewState extends State<ProductManagementView> {
           final List<CategoryEntity> categories = state is ProductsSuccess
               ? state.categories
               : [];
-          final List<String> categoryNames = [
-            'الكل',
-            ...categories.map((c) => c.name),
-          ];
           final int selectedIndex = state is ProductsSuccess
               ? state.selectedCategoryIndex
               : 0;
@@ -125,23 +121,85 @@ class _ProductManagementViewState extends State<ProductManagementView> {
                   ],
                 ),
 
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 10,
+                if (state is ProductsLoading)
+                  const SliverFillRemaining(
+                    hasScrollBody: false,
+                    child: Center(child: CircularProgressIndicator()),
+                  )
+                else if (state is ProductsError)
+                  SliverFillRemaining(
+                    hasScrollBody: false,
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CustomText(text: state.message, size: 16),
+                          const Gap(15),
+                          ElevatedButton(
+                            onPressed: () {
+                              context.read<ProductsCubit>().loadInitialData();
+                            },
+                            child: const Text('إعادة المحاولة'),
+                          ),
+                        ],
+                      ),
                     ),
-                    child: Column(
-                      children: [
-                        isMobile
-                            ? Column(
-                                children: [
-                                  SizedBox(
-                                    width: double.infinity,
-                                    child: CustomButton(
+                  )
+                else if (state is ProductsSuccess) ...[
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 10,
+                      ),
+                      child: Column(
+                        children: [
+                          isMobile
+                              ? Column(
+                                  children: [
+                                    SizedBox(
+                                      width: double.infinity,
+                                      child: CustomButton(
+                                        text: 'إضافة فئة/قسم',
+                                        color: Colors.green,
+                                        size: 16,
+                                        icon: const Icon(
+                                          Icons.create_new_folder_outlined,
+                                          color: Colors.white,
+                                          size: 20,
+                                        ),
+                                        onTap: () =>
+                                            AddCategoryBottomSheet.show(
+                                              context,
+                                            ),
+                                      ),
+                                    ),
+                                    const Gap(10),
+                                    SizedBox(
+                                      width: double.infinity,
+                                      child: CustomButton(
+                                        text: 'إضافة منتج جديد',
+                                        size: 16,
+                                        icon: const Icon(
+                                          Icons.add_circle_outline,
+                                          color: Colors.white,
+                                          size: 20,
+                                        ),
+                                        onTap: () => AddProductBottomSheet.show(
+                                          context,
+                                          categories,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              : Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    CustomButton(
                                       text: 'إضافة فئة/قسم',
                                       color: Colors.green,
-                                      size: 16,
+                                      size: 17,
                                       icon: const Icon(
                                         Icons.create_new_folder_outlined,
                                         color: Colors.white,
@@ -150,13 +208,10 @@ class _ProductManagementViewState extends State<ProductManagementView> {
                                       onTap: () =>
                                           AddCategoryBottomSheet.show(context),
                                     ),
-                                  ),
-                                  const Gap(10),
-                                  SizedBox(
-                                    width: double.infinity,
-                                    child: CustomButton(
+                                    const Gap(10),
+                                    CustomButton(
                                       text: 'إضافة منتج جديد',
-                                      size: 16,
+                                      size: 17,
                                       icon: const Icon(
                                         Icons.add_circle_outline,
                                         color: Colors.white,
@@ -167,153 +222,119 @@ class _ProductManagementViewState extends State<ProductManagementView> {
                                         categories,
                                       ),
                                     ),
-                                  ),
-                                ],
-                              )
-                            : Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  CustomButton(
-                                    text: 'إضافة فئة/قسم',
-                                    color: Colors.green,
-                                    size: 17,
-                                    icon: const Icon(
-                                      Icons.create_new_folder_outlined,
-                                      color: Colors.white,
-                                      size: 20,
-                                    ),
-                                    onTap: () =>
-                                        AddCategoryBottomSheet.show(context),
-                                  ),
-                                  const Gap(10),
-                                  CustomButton(
-                                    text: 'إضافة منتج جديد',
-                                    size: 17,
-                                    icon: const Icon(
-                                      Icons.add_circle_outline,
-                                      color: Colors.white,
-                                      size: 20,
-                                    ),
-                                    onTap: () => AddProductBottomSheet.show(
-                                      context,
-                                      categories,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                        const Gap(15),
-                        SizedBox(
-                          height: 45,
-                          child: SearchField(
-                            onChanged: (value) {
-                              context.read<ProductsCubit>().onSearchChanged(
-                                value,
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 5),
-                    child: ProductCategory(
-                      selectedIndex: selectedIndex,
-
-                      onTap: (int index) {
-                        context.read<ProductsCubit>().selectCategory(index);
-                      },
-                      categories: categories,
-                      onLongPressDelete: (String categoryId) {
-                        context.read<ProductsCubit>().deleteCategory(
-                          categoryId,
-                        );
-                      },
-                    ),
-                  ),
-                ),
-
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 25,
-                      vertical: 10,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: const [
-                        CustomText(
-                          text: 'قائمة المنتجات',
-                          size: 20,
-                          weight: FontWeight.w700,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-
-                if (state is ProductsLoading)
-                  const SliverFillRemaining(
-                    child: Center(child: CircularProgressIndicator()),
-                  )
-                else if (state is ProductsSuccess &&
-                    state.filteredProducts.isEmpty)
-                  const SliverFillRemaining(
-                    child: Center(
-                      child: CustomText(
-                        text: 'لا توجد منتجات مطابقة',
-                        size: 16,
-                      ),
-                    ),
-                  )
-                else if (state is ProductsSuccess)
-                  SliverPadding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 15,
-                      vertical: 10,
-                    ),
-                    sliver: SliverGrid(
-                      delegate: SliverChildBuilderDelegate(
-                        childCount: state.filteredProducts.length,
-                        (context, index) {
-                          final product = state.filteredProducts[index];
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 5),
-                            child: ProductCard(
-                              name: product.name,
-                              sku: product.sku,
-                              category: product.category?.name ?? 'غير مصنف',
-                              salePrice: product.price.toStringAsFixed(2),
-                              costPrice: product.costPrice.toStringAsFixed(2),
-                              quantity: product.stockQuantity.toString(),
-                              minQuantity: product.minStockLevel.toString(),
-                              onDelete: () {
-                                context.read<ProductsCubit>().deleteProduct(
-                                  product.id,
-                                );
-                              },
-                              onEdit: () {
-                                AddProductBottomSheet.show(
-                                  context,
-                                  categories,
-                                  productToEdit: product,
+                                  ],
+                                ),
+                          const Gap(15),
+                          SizedBox(
+                            height: 45,
+                            child: SearchField(
+                              onChanged: (value) {
+                                context.read<ProductsCubit>().onSearchChanged(
+                                  value,
                                 );
                               },
                             ),
-                          );
-                        },
-                      ),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: isMobile ? 1 : 2,
-                        childAspectRatio: isMobile ? 1.3 : 1.8,
-                        mainAxisSpacing: 15,
-                        crossAxisSpacing: 15,
+                          ),
+                        ],
                       ),
                     ),
                   ),
+
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5),
+                      child: ProductCategory(
+                        selectedIndex: selectedIndex,
+                        categories: categories,
+                        onTap: (int index) {
+                          context.read<ProductsCubit>().selectCategory(index);
+                        },
+                        onLongPressDelete: (String categoryId) {
+                          context.read<ProductsCubit>().deleteCategory(
+                            categoryId,
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 25,
+                        vertical: 10,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: const [
+                          CustomText(
+                            text: 'قائمة المنتجات',
+                            size: 20,
+                            weight: FontWeight.w700,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  if (state.filteredProducts.isEmpty)
+                    const SliverFillRemaining(
+                      hasScrollBody: false,
+                      child: Center(
+                        child: CustomText(
+                          text: 'لا توجد منتجات مطابقة',
+                          size: 16,
+                        ),
+                      ),
+                    )
+                  else
+                    SliverPadding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 15,
+                        vertical: 10,
+                      ),
+                      sliver: SliverGrid(
+                        delegate: SliverChildBuilderDelegate(
+                          childCount: state.filteredProducts.length,
+                          (context, index) {
+                            final product = state.filteredProducts[index];
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 5,
+                              ),
+                              child: ProductCard(
+                                name: product.name,
+                                sku: product.sku,
+                                category: product.category?.name ?? 'غير مصنف',
+                                salePrice: product.price.toStringAsFixed(2),
+                                costPrice: product.costPrice.toStringAsFixed(2),
+                                quantity: product.stockQuantity.toString(),
+                                minQuantity: product.minStockLevel.toString(),
+                                onDelete: () {
+                                  context.read<ProductsCubit>().deleteProduct(
+                                    product.id,
+                                  );
+                                },
+                                onEdit: () {
+                                  AddProductBottomSheet.show(
+                                    context,
+                                    categories,
+                                    productToEdit: product,
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                        ),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: isMobile ? 1 : 2,
+                          childAspectRatio: isMobile ? 1.3 : 1.8,
+                          mainAxisSpacing: 15,
+                          crossAxisSpacing: 15,
+                        ),
+                      ),
+                    ),
+                ],
               ],
             ),
           );

@@ -4,6 +4,7 @@ import 'package:inventory_managment/core/network/dio_client.dart';
 import 'package:inventory_managment/features/auth/auth_injection.dart';
 import 'package:inventory_managment/features/dashboard/dashboard_injection.dart';
 import 'package:inventory_managment/features/products/products_injection.dart';
+import 'package:inventory_managment/features/sales/sales_injection.dart';
 
 final getIt = GetIt.instance;
 
@@ -14,4 +15,5 @@ Future<void> initServiceLocator() async {
   initAuthInjection(getIt);
   initDashboardInjection(getIt);
   initProductsInjection(getIt);
+  initSalesInjection(getIt);
 }

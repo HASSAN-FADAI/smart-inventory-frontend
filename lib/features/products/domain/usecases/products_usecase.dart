@@ -63,4 +63,8 @@ class ProductsUseCase {
   Future<void> deleteCategory(String id) async {
     return await productsRepo.deleteCategory(id);
   }
+
+  void deductStockLocally(Map<String, int> soldQuantities) {
+    productsRepo.deductStockLocally(soldQuantities);
+  }
 }

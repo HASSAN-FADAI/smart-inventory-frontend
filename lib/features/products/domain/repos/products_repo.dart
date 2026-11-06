@@ -20,7 +20,7 @@ abstract class ProductsRepo {
     required String categoryId,
   });
   Future<ProductEntity> updateProduct(String id, Map<String, dynamic> data);
-
+  void deductStockLocally(Map<String, int> soldQuantities);
   Future<void> deleteProduct(String id);
   Future<void> deleteCategory(String id);
 }

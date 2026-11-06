@@ -158,4 +158,30 @@ class ProductsRepoImpl implements ProductsRepo {
       _cachedCategories!.removeWhere((c) => c.id == id);
     }
   }
+
+  @override
+  void deductStockLocally(Map<String, int> soldQuantities) {
+    if (_cachedProducts == null) return;
+    for (int i = 0; i < _cachedProducts!.length; i++) {
+      final p = _cachedProducts![i];
+      if (soldQuantities.containsKey(p.id)) {
+        final newStock = (p.stockQuantity - soldQuantities[p.id]!).clamp(
+          0,
+          999999,
+        );
+        _cachedProducts![i] = ProductModel(
+          id: p.id,
+          sku: p.sku,
+          name: p.name,
+          description: p.description,
+          price: p.price,
+          costPrice: p.costPrice,
+          stockQuantity: newStock,
+          minStockLevel: p.minStockLevel,
+          categoryId: p.categoryId,
+          category: p.category,
+        );
+      }
+    }
+  }
 }
