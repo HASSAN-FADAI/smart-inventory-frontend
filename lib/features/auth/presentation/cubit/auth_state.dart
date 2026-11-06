@@ -21,3 +21,5 @@ class AuthLocked extends AuthState {
   final int remainingSeconds;
   AuthLocked(this.remainingSeconds);
 }
+
+class AuthLogoutSuccess extends AuthState {}

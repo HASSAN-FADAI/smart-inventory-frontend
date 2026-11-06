@@ -29,4 +29,8 @@ class AuthRemoteDataSource {
     });
     return UserModel.fromJson(response);
   }
+
+  Future<void> logout() async {
+    await apiService.post('/auth/logout', {});
+  }
 }

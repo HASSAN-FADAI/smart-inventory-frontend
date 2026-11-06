@@ -6,12 +6,15 @@ import 'package:inventory_managment/features/auth/domain/usecases/auth_usecase.d
 import 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  final AuthUseCase loginUseCase, registerUseCase;
+  final AuthUseCase loginUseCase, registerUseCase, logoutUseCase;
 
   Timer? _cooldownTimer;
 
-  AuthCubit({required this.loginUseCase, required this.registerUseCase})
-    : super(AuthInitial());
+  AuthCubit({
+    required this.loginUseCase,
+    required this.registerUseCase,
+    required this.logoutUseCase,
+  }) : super(AuthInitial());
 
   void _startCooldown() {
     int seconds = 15;
@@ -73,5 +76,17 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> close() {
     _cooldownTimer?.cancel();
     return super.close();
+  }
+
+  Future<void> logout() async {
+    emit(AuthLoading());
+    try {
+      await logoutUseCase.logout();
+      emit(AuthLogoutSuccess());
+    } on ApiError catch (e) {
+      emit(AuthError(e.message));
+    } catch (e) {
+      emit(AuthError(e.toString()));
+    }
   }
 }

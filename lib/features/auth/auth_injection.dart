@@ -27,6 +27,7 @@ void initAuthInjection(GetIt getIt) {
     () => AuthCubit(
       loginUseCase: getIt<AuthUseCase>(),
       registerUseCase: getIt<AuthUseCase>(),
+      logoutUseCase: getIt<AuthUseCase>(),
     ),
   );
 }

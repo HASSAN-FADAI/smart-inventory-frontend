@@ -46,4 +46,13 @@ class AuthRepoImpl implements AuthRepo {
 
     return user;
   }
+
+  @override
+  Future<void> logout() async {
+    try {
+      await remoteDataSource.logout();
+    } finally {
+      await PrefHelper.clearAll();
+    }
+  }
 }

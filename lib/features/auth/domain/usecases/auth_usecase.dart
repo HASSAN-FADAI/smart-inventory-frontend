@@ -24,4 +24,8 @@ class AuthUseCase {
       password: password,
     );
   }
+
+  Future<void> logout() async {
+    return await authRepo.logout();
+  }
 }

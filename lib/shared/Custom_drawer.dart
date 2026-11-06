@@ -8,6 +8,7 @@ import 'package:inventory_managment/features/inventory/views/inventory_managemen
 import 'package:inventory_managment/features/order_history/views/order_history_view.dart';
 import 'package:inventory_managment/features/report/views/reports_view.dart';
 import 'package:inventory_managment/features/sales/views/sales_view.dart';
+import 'package:inventory_managment/features/auth/presentation/views/settings_view.dart';
 import 'package:inventory_managment/features/supplier/views/suppliers_management_view.dart';
 import 'package:inventory_managment/shared/custom_text.dart';
 
@@ -95,7 +96,7 @@ class CustomDrawer extends StatelessWidget {
                     context,
                     icon: Icons.settings_outlined,
                     title: 'الإعدادات',
-                    // destination: const SettingsView(),
+                    destination: const SettingsView(),
                   ),
                 ],
               ),
