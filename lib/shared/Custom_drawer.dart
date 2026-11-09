@@ -4,7 +4,7 @@ import 'package:inventory_managment/core/constants/app_color.dart';
 import 'package:inventory_managment/features/customer/views/customers_management_view.dart';
 import 'package:inventory_managment/features/products/presentation/views/product_management_view.dart';
 import 'package:inventory_managment/features/dashboard/presentation/views/dashboard_view.dart';
-import 'package:inventory_managment/features/inventory/views/inventory_management_view.dart';
+import 'package:inventory_managment/features/inventory/presentation/views/inventory_management_view.dart';
 import 'package:inventory_managment/features/order_history/views/order_history_view.dart';
 import 'package:inventory_managment/features/report/views/reports_view.dart';
 import 'package:inventory_managment/features/sales/presentation/views/sales_view.dart';

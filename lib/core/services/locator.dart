@@ -3,6 +3,7 @@ import 'package:inventory_managment/core/network/api_service.dart';
 import 'package:inventory_managment/core/network/dio_client.dart';
 import 'package:inventory_managment/features/auth/auth_injection.dart';
 import 'package:inventory_managment/features/dashboard/dashboard_injection.dart';
+import 'package:inventory_managment/features/inventory/inventory_injection.dart';
 import 'package:inventory_managment/features/products/products_injection.dart';
 import 'package:inventory_managment/features/sales/sales_injection.dart';
 
@@ -16,4 +17,5 @@ Future<void> initServiceLocator() async {
   initDashboardInjection(getIt);
   initProductsInjection(getIt);
   initSalesInjection(getIt);
+  initInventoryInjection(getIt);
 }

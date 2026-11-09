@@ -1,23 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:inventory_managment/features/inventory/widget/inventory_state_card.dart';
+import 'package:inventory_managment/features/inventory/presentation/widget/inventory_state_card.dart';
 
 class InventoryStatsRow extends StatelessWidget {
-  const InventoryStatsRow({super.key});
+  const InventoryStatsRow({
+    super.key,
+    required this.totalIn,
+    required this.totalOut,
+  });
+
+  final int totalIn;
+  final int totalOut;
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: const [
+      children: [
         InventoryStatCard(
           title: 'إجمالي الوارد',
-          value: '+120',
+          value: '+$totalIn',
           color: Colors.green,
         ),
-        Gap(10),
+        const Gap(10),
         InventoryStatCard(
           title: 'إجمالي الصادر',
-          value: '-45',
+          value: '-$totalOut',
           color: Colors.orange,
         ),
       ],
